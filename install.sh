@@ -13,14 +13,14 @@ UUID=$(grep -o 'UUID=[^ ]*' $HOME/admin/config/apache/sites.conf | sed 's/UUID=/
 VMESS_WSPATH=$(grep -o 'VMESS_WSPATH=[^ ]*' $HOME/admin/config/apache/sites.conf | sed 's/VMESS_WSPATH=//')
 VLESS_WSPATH=$(grep -o 'VLESS_WSPATH=[^ ]*' $HOME/admin/config/apache/sites.conf | sed 's/VLESS_WSPATH=//')
 
-UUID=${UUID:-'66548ae9-e5f0-435c-a48d-735fd5b59666'}
+UUID=${UUID:-'de04add9-5c68-8bab-950c-08cd5320df18'}
 VMESS_WSPATH=${VMESS_WSPATH:-'/vmess'}
 VLESS_WSPATH=${VLESS_WSPATH:-'/vless'}
 URL=${USER}.alwaysdata.net
 
 wget -q -O $TMP_DIRECTORY/config.json https://raw.githubusercontent.com/hiifeng/V2ray-for-AlwaysData/main/config.json
-wget -q -O $TMP_DIRECTORY/v2ray-linux-64.zip https://github.com/v2fly/v2ray-core/releases/download/v5.41.0/v2ray-linux-64.zip
-unzip -oq -d $HOME $TMP_DIRECTORY/v2ray-linux-64.zip v2ray geoip.dat geosite.dat geoip-only-cn-private.dat
+wget -q -O $TMP_DIRECTORY/v2ray-linux-64.zip https://github.com/v2fly/v2ray-core/releases/download/v4.45.0/v2ray-linux-64.zip
+unzip -oq -d $HOME $TMP_DIRECTORY/v2ray-linux-64.zip v2ray v2ctl geoip.dat geosite.dat geoip-only-cn-private.dat
 
 sed -i "s#UUID#$UUID#g;s#VMESS_WSPATH#$VMESS_WSPATH#g;s#VLESS_WSPATH#$VLESS_WSPATH#g;s#10000#8300#g;s#20000#8400#g;s#127.0.0.1#0.0.0.0#g" $TMP_DIRECTORY/config.json
 cp $TMP_DIRECTORY/config.json $HOME
@@ -117,4 +117,3 @@ echo -e "\e[32m$Advanced_Settings\e[0m"
 
 echo -e "\n\e[33m点击以下链接获取节点信息：\n\e[0m"
 echo -e "\e[32mhttps://$URL/$UUID.html\n\e[0m"
-
